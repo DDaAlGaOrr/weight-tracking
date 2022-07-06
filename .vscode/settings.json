@@ -1,5 +1,6 @@
 {
     "editor.insertSpaces": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[typescript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
@@ -11,9 +12,6 @@
     },
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[dockercompose]": {
-        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
     "cSpell.words": ["nestjs"]
 }
