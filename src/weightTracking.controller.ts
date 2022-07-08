@@ -9,7 +9,6 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-import { json } from 'stream/consumers'
 
 @Controller()
 class WeightController {

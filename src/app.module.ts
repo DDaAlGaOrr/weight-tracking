@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common'
 
 // import { CatsController } from './app.controller'
 import { AppService } from './app.service'
-import WeightController from './weight-data.controller'
+import WeightTrackingController from './weightTracking.controller'
+import ProductController from './product.controller'
 
 @Module({
     imports: [],
-    controllers: [WeightController],
+    controllers: [ProductController],
     providers: [AppService],
 })
 export class AppModule {}
