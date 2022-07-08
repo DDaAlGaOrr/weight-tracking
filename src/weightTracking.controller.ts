@@ -3,29 +3,38 @@ import {
     Controller,
     Delete,
     Get,
+    HttpCode,
+    HttpStatus,
     Post,
     Put,
     Res,
-    HttpCode,
-    HttpStatus,
 } from '@nestjs/common'
 import { Response } from 'express'
+import { ValidateCreateUser } from './dto/create-user.dto'
 
 @Controller()
 class WeightTrackingController {
-    // User login
     @Post('authLogin')
     @HttpCode(HttpStatus.OK)
     login(@Body() body: any) {
         return `credentials: ${JSON.stringify(body)}`
     }
-    // Create new user
+
     @Post('createUser')
     @HttpCode(HttpStatus.CREATED)
-    createUser(@Body() body: any) {
+    createUser(@Body() body: ValidateCreateUser) {
         return `new user data: ${JSON.stringify(body)}`
     }
-    // option 2 get params
+
+    @Put('updateUserData')
+    @HttpCode(HttpStatus.OK)
+    updateUserData(@Res() res: Response, @Body() body: any) {
+        return res.json({
+            message: 'Success',
+            data: 'update user data',
+        })
+    }
+
     @Get('detaliedTable')
     @HttpCode(HttpStatus.OK)
     getDetaliedTable(@Res() res: Response) {
@@ -67,13 +76,23 @@ class WeightTrackingController {
             ],
         })
     }
-    @Delete()
-    DeleteProduct() {
-        return 'Delete product'
+
+    @Delete('deleteWeightData')
+    @HttpCode(HttpStatus.OK)
+    DeleteWeightData(@Res() res: Response, @Body() body: any) {
+        return res.json({
+            message: 'Success',
+            data: 'delete data',
+        })
     }
-    @Put()
-    updateProduct() {
-        return 'update product'
+
+    @Put('updateWeightData')
+    @HttpCode(HttpStatus.OK)
+    updateWeightData(@Res() res: Response, @Body() body: any) {
+        return res.json({
+            message: 'Success',
+            data: 'update data',
+        })
     }
 }
 
