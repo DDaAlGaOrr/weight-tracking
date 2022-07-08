@@ -1,74 +1,80 @@
 import {
+    Body,
     Controller,
+    Delete,
     Get,
-    Header,
+    Post,
+    Put,
+    Res,
     HttpCode,
     HttpStatus,
-    Patch,
-    Post,
-    Res,
 } from '@nestjs/common'
 import { Response } from 'express'
 
 @Controller()
-class WeightController {
-    elements = [
-        {
-            user: 'Daniel',
-            type: 'super',
-        },
-    ]
-
-    @Get()
-    getAll() {
-        return {
-            message: 'Success',
-            data: this.elements,
-        }
+class WeightTrackingController {
+    // User login
+    @Post('authLogin')
+    @HttpCode(HttpStatus.OK)
+    login(@Body() body: any) {
+        return `credentials: ${JSON.stringify(body)}`
     }
-
-    @Post()
-    createNew() {
-        this.elements.push({ user: 'Alejandro', type: 'super' })
-        return this.elements
-    }
-
-    @Post('httpCode')
+    // Create new user
+    @Post('createUser')
     @HttpCode(HttpStatus.CREATED)
-    createWithHttpCode() {
-        this.elements.push({ user: 'Albert', type: 'super' })
-        return
+    createUser(@Body() body: any) {
+        return `new user data: ${JSON.stringify(body)}`
+    }
+    // option 2 get params
+    @Get('detaliedTable')
+    @HttpCode(HttpStatus.OK)
+    getDetaliedTable(@Res() res: Response) {
+        return res.json({
+            message: 'success',
+            data: {
+                date: '07/07/2022',
+                actualWeight: 90,
+                loseWeight: 1,
+                IMC: 34,
+            },
+        })
     }
 
-    @Patch('httpCode')
+    @Get('generalTable')
     @HttpCode(HttpStatus.OK)
-    editElement() {
-        this.elements[0] = { user: 'Alejandro', type: 'normal' }
-        console.log('Se a editado el primer elemento')
-        return this.elements[0]
+    getGeneralTable(@Res() res: Response) {
+        return res.json({
+            message: 'success',
+            data: {
+                initialWeight: 91,
+                actualWeight: 90,
+                targetWeight: 75,
+            },
+        })
     }
 
-    @Get('headerCustom')
+    @Get('graph')
     @HttpCode(HttpStatus.OK)
-    @Header('My-header', 'value header')
-    getData() {
-        return this.elements
+    generateGraph(@Res() res: Response) {
+        return res.json({
+            message: 'success',
+            data: [
+                {
+                    weight: 91,
+                    date: '07/07/2022',
+                },
+                { weight: 90, date: '08/07/2022' },
+            ],
+        })
     }
-    //no decoradores
-    @Get('useSpecificLibrary')
-    useLibrary(@Res() res: Response) {
-        return res
-            .status(HttpStatus.OK)
-            .header('my-Header-2', 'vale head')
-            .jsonp('libreria especifica')
+    @Delete()
+    DeleteProduct() {
+        return 'Delete product'
     }
-    // combined response decorators and library specific
-    @Get('combinedResponse')
-    combineResponse(@Res({ passthrough: true }) res: Response) {
-        res.status(HttpStatus.NOT_MODIFIED)
-        res.header('header-3', 'value header 3')
-        return res.json('combined answer, review headers')
+    @Put()
+    updateProduct() {
+        return 'update product'
     }
 }
 
-export default WeightController
+export default WeightTrackingController
