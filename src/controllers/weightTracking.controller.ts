@@ -10,7 +10,7 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-import { ValidateCreateUser } from './dto/create-user.dto'
+import { ValidateCreateUser } from '../dto/create-user.dto'
 
 @Controller()
 class WeightTrackingController {
@@ -28,7 +28,7 @@ class WeightTrackingController {
 
     @Put('updateUserData')
     @HttpCode(HttpStatus.OK)
-    updateUserData(@Res() res: Response, @Body() body: any) {
+    updateUserData(@Res() res: Response) {
         return res.json({
             message: 'Success',
             data: 'update user data',
@@ -79,7 +79,7 @@ class WeightTrackingController {
 
     @Delete('deleteWeightData')
     @HttpCode(HttpStatus.OK)
-    DeleteWeightData(@Res() res: Response, @Body() body: any) {
+    DeleteWeightData(@Res() res: Response) {
         return res.json({
             message: 'Success',
             data: 'delete data',
@@ -88,7 +88,7 @@ class WeightTrackingController {
 
     @Put('updateWeightData')
     @HttpCode(HttpStatus.OK)
-    updateWeightData(@Res() res: Response, @Body() body: any) {
+    updateWeightData(@Res() res: Response) {
         return res.json({
             message: 'Success',
             data: 'update data',
