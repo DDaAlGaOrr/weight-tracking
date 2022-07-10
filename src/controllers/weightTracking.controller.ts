@@ -8,8 +8,10 @@ import {
     Post,
     Put,
     Res,
+    Param,
+    Query,
 } from '@nestjs/common'
-import { Response } from 'express'
+import { query, Response } from 'express'
 import { ValidateCreateUser } from '../dto/create-user.dto'
 
 @Controller()
@@ -28,10 +30,10 @@ class WeightTrackingController {
 
     @Put('updateUserData')
     @HttpCode(HttpStatus.OK)
-    updateUserData(@Res() res: Response) {
+    updateUserData(@Query() query: any, @Res() res: Response) {
         return res.json({
             message: 'Success',
-            data: 'update user data',
+            data: `Usuario con el ID: ${query.id} actualizado`,
         })
     }
 
@@ -79,19 +81,19 @@ class WeightTrackingController {
 
     @Delete('deleteWeightData')
     @HttpCode(HttpStatus.OK)
-    DeleteWeightData(@Res() res: Response) {
+    DeleteWeightData(@Query() query: any, @Res() res: Response) {
         return res.json({
             message: 'Success',
-            data: 'delete data',
+            data: `Información con el id ${query.id} eliminada`,
         })
     }
 
     @Put('updateWeightData')
     @HttpCode(HttpStatus.OK)
-    updateWeightData(@Res() res: Response) {
+    updateWeightData(@Query() query: any, @Res() res: Response) {
         return res.json({
             message: 'Success',
-            data: 'update data',
+            data: `Información con el id ${query.id} actualizada`,
         })
     }
 }
