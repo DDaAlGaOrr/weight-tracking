@@ -7,11 +7,10 @@ import {
     HttpStatus,
     Post,
     Put,
-    Res,
-    Param,
     Query,
+    Res,
 } from '@nestjs/common'
-import { query, Response } from 'express'
+import { Response } from 'express'
 import { ValidateCreateUser } from '../dto/create-user.dto'
 
 @Controller()
