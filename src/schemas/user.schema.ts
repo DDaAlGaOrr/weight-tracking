@@ -24,12 +24,6 @@ export class User {
     age: string
 
     @Prop({ required: true })
-    firstWeight: number
-
-    @Prop({ required: true })
-    date: Date
-
-    @Prop({ required: true })
     height: number
 
     @Prop({ required: true })
