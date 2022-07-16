@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Delete,
     HttpCode,
     HttpStatus,
     Post,
@@ -20,18 +21,26 @@ export class UsersController {
         console.log(email, password)
     }
 
-    @Post('createUser')
+    @Post()
     @HttpCode(HttpStatus.CREATED)
     createUser(@Body() body: any) {
         return `new user data: ${JSON.stringify(body)}`
     }
 
-    @Put('updateUserData')
+    @Put()
     @HttpCode(HttpStatus.OK)
     updateUserData(@Query() query: any, @Res() res: Response) {
         return res.json({
             message: 'Success',
             data: `Usuario con el ID: ${query.id} actualizado`,
+        })
+    }
+    @Delete()
+    @HttpCode(HttpStatus.OK)
+    DeleteUserData(@Query() query: any, @Res() res: Response) {
+        return res.json({
+            message: 'Success',
+            data: `Usuario con el ID: ${query.id} eliminado`,
         })
     }
 }
