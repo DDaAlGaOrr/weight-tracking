@@ -11,19 +11,20 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-import { ValidateCreateUser } from '../dto/create-user.dto'
 
 @Controller()
 class WeightTrackingController {
     @Post('authLogin')
     @HttpCode(HttpStatus.OK)
     login(@Body() body: any) {
-        return `credentials: ${JSON.stringify(body)}`
+        const email = JSON.stringify(body.credentials.email)
+        const password = JSON.stringify(body.credentials.password)
+        console.log(email, password)
     }
 
     @Post('createUser')
     @HttpCode(HttpStatus.CREATED)
-    createUser(@Body() body: ValidateCreateUser) {
+    createUser(@Body() body: any) {
         return `new user data: ${JSON.stringify(body)}`
     }
 
