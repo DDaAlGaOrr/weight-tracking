@@ -1,4 +1,4 @@
 export interface WeigthTrackingGraphInterface {
     weight: number
-    date: Date
+    date: string
 }

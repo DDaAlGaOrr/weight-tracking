@@ -1,5 +1,5 @@
 import { IsDate, IsNumber } from '@nestjs/class-validator'
-export class ValidateCreateUser {
+export class ValidateNewWeightTrackingData {
     @IsNumber()
     weight: number
 

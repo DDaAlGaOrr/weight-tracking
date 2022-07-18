@@ -1,5 +1,5 @@
 export interface DetailedWeightTableInterface {
-    date: Date
+    date: string
     actualWeight: number
     loseWeight: number
     IMC: number

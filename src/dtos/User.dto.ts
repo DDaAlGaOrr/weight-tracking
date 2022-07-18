@@ -6,7 +6,7 @@ import {
     MinLength,
 } from '@nestjs/class-validator'
 
-export class ValidateCreateUser {
+export class ValidateCreateUserDto {
     @IsNotEmpty()
     @IsEmail()
     email: string

@@ -10,20 +10,36 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-
+import { ValidateCreateUserDto } from 'src/dtos/User.dto'
+import { AuthUserDto } from 'src/dtos/AuthUser.dto'
+import { UsersService } from 'src/services/Users.service'
 @Controller('users')
 export class UsersController {
+    constructor(private userService: UsersService) {}
     @Post('authLogin')
     @HttpCode(HttpStatus.OK)
-    login(@Body() body: any) {
-        const email = JSON.stringify(body.credentials.email)
-        const password = JSON.stringify(body.credentials.password)
-        console.log(email, password)
+    login(@Body() body: AuthUserDto) {
+        const email = JSON.stringify(body.email)
+        const password = JSON.stringify(body.password)
+        this.userService.authLogin({
+            email: email,
+            password: password,
+        })
     }
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    createUser(@Body() body: any) {
+    createUser(@Body() body: ValidateCreateUserDto) {
+        this.userService.createUser({
+            email: 'Email',
+            username: 'Username',
+            firstname: 'Firstname',
+            lastname: 'Lastname',
+            password: 'Password',
+            age: 19,
+            height: 178,
+            targetWeigth: 75,
+        })
         return `new user data: ${JSON.stringify(body)}`
     }
 
