@@ -1,21 +1,41 @@
 import { Injectable } from '@nestjs/common'
+
 import { DetailedWeightTableInterface } from 'src/interfaces/DetailedWeightTable.interface'
 import { GeneralWeihtTableInterface } from 'src/interfaces/GeneralWeightTable.interface'
-import { WeigthTrackingGraphInterface } from 'src/interfaces/WeightTrackingGraph.interface'
 import { NewWeightTrackingDataInterface } from 'src/interfaces/NewWeightTrackingData.interface'
+import { WeigthTrackingGraphInterface } from 'src/interfaces/WeightTrackingGraph.interface'
+import { json } from 'stream/consumers'
 
+interface DeleteWeightData {
+    id: number
+}
 @Injectable()
 export class WeigthTrackingDataService {
-    CreateWeightTrackingData(newTrackingData: NewWeightTrackingDataInterface) {
+    createWeightTrackingData(newTrackingData: NewWeightTrackingDataInterface) {
         console.log(newTrackingData)
     }
-    GeneralWeihtTable(readDetailedData: GeneralWeihtTableInterface) {
-        console.log(readDetailedData)
+    generalWeihtTable(): GeneralWeihtTableInterface {
+        return {
+            initialWeight: 91,
+            actualWeight: 90,
+            targetWeight: 75,
+        }
     }
-    DetailedWeightTable(readGeneralData: DetailedWeightTableInterface) {
-        console.log(readGeneralData)
+    detailedWeightTable(): DetailedWeightTableInterface {
+        return {
+            date: '07/12/2022',
+            IMC: 34,
+            actualWeight: 90,
+            loseWeight: 1,
+        }
     }
-    WeigthTrackingGraph(readGraphData: WeigthTrackingGraphInterface) {
-        console.log(readGraphData)
+    weigthTrackingGraph(): WeigthTrackingGraphInterface {
+        return {
+            date: '07/11/2022',
+            weight: 91,
+        }
+    }
+    deleteWeightTrackingData(id: DeleteWeightData) {
+        console.log(id)
     }
 }

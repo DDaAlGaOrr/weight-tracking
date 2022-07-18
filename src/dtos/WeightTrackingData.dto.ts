@@ -1,8 +1,10 @@
-import { IsDate, IsNumber } from '@nestjs/class-validator'
+import { IsDate, IsNotEmpty, IsNumber, IsString } from '@nestjs/class-validator'
 export class ValidateNewWeightTrackingData {
+    @IsNotEmpty()
     @IsNumber()
     weight: number
 
-    @IsDate()
-    date: Date
+    @IsNotEmpty()
+    @IsString()
+    date: string
 }

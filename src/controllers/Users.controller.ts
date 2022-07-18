@@ -10,12 +10,14 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-import { ValidateCreateUserDto } from 'src/dtos/User.dto'
 import { AuthUserDto } from 'src/dtos/AuthUser.dto'
+import { ValidateCreateUserDto } from 'src/dtos/User.dto'
 import { UsersService } from 'src/services/Users.service'
+
 @Controller('users')
 export class UsersController {
     constructor(private userService: UsersService) {}
+
     @Post('authLogin')
     @HttpCode(HttpStatus.OK)
     login(@Body() body: AuthUserDto) {
@@ -25,38 +27,34 @@ export class UsersController {
             email: email,
             password: password,
         })
+        return {
+            message: 'auth user',
+        }
     }
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
     createUser(@Body() body: ValidateCreateUserDto) {
         this.userService.createUser({
-            email: 'Email',
-            username: 'Username',
-            firstname: 'Firstname',
-            lastname: 'Lastname',
-            password: 'Password',
-            age: 19,
-            height: 178,
-            targetWeigth: 75,
+            email: body.email,
+            firstname: body.firstname,
+            lastname: body.lastname,
+            password: body.password,
+            age: body.age,
+            height: body.height,
+            targetWeigth: body.targetWeight,
         })
-        return `new user data: ${JSON.stringify(body)}`
+        return 'User created'
     }
 
     @Put()
     @HttpCode(HttpStatus.OK)
     updateUserData(@Query() query: any, @Res() res: Response) {
-        return res.json({
-            message: 'Success',
-            data: `Usuario con el ID: ${query.id} actualizado`,
-        })
+        return 'pendient'
     }
     @Delete()
     @HttpCode(HttpStatus.OK)
     DeleteUserData(@Query() query: any, @Res() res: Response) {
-        return res.json({
-            message: 'Success',
-            data: `Usuario con el ID: ${query.id} eliminado`,
-        })
+        return 'pedient'
     }
 }

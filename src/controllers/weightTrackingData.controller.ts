@@ -11,80 +11,64 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-import { WeigthTrackingDataService } from 'src/services/WeigthTrackingData.service'
 import { ValidateNewWeightTrackingData } from 'src/dtos/WeightTrackingData.dto'
+import { WeigthTrackingDataService } from 'src/services/WeigthTrackingData.service'
 
+class DeleteWeightTrackingDataDto {
+    id: number
+}
 @Controller('weightTrackingData')
 export class WeightTrackingDataController {
     constructor(private weightTrackingDataService: WeigthTrackingDataService) {}
 
     @HttpCode(HttpStatus.CREATED)
     @Post()
-    async saveNewweightTrackingData(
+    saveNewweightTrackingData(
         @Res() res: Response,
         @Body() body: ValidateNewWeightTrackingData,
     ) {
-        await this.weightTrackingDataService.CreateWeightTrackingData(body)
+        this.weightTrackingDataService.createWeightTrackingData({
+            date: body.date,
+            weight: body.weight,
+        })
         return res.json({
-            message: 'success',
-            data: body,
+            message: 'Created',
         })
     }
 
     @Get('detaliedTable')
     @HttpCode(HttpStatus.OK)
-    async getDetaliedTable(@Res() res: Response) {
-        await this.weightTrackingDataService.DetailedWeightTable({
-            date: '07/12/2022',
-            IMC: 34,
-            actualWeight: 90,
-            loseWeight: 1,
-        })
-        return res.json({
-            message: 'success',
-        })
+    getDetaliedTable(@Res() res: Response) {
+        return res.json(this.weightTrackingDataService.detailedWeightTable())
     }
 
     @Get('generalTable')
     @HttpCode(HttpStatus.OK)
     getGeneralTable(@Res() res: Response) {
-        this.weightTrackingDataService.GeneralWeihtTable({
-            initialWeight: 91,
-            actualWeight: 90,
-            targetWeight: 75,
-        })
-        return res.json({
-            message: 'success',
-        })
+        return res.json(this.weightTrackingDataService.generalWeihtTable())
     }
 
     @Get('graph')
     @HttpCode(HttpStatus.OK)
     generateGraph(@Res() res: Response) {
-        this.weightTrackingDataService.WeigthTrackingGraph({
-            date: '07/11/2022',
-            weight: 91,
-        })
-        return res.json({
-            message: 'success',
-        })
+        return res.json(this.weightTrackingDataService.weigthTrackingGraph())
     }
 
     @Delete()
     @HttpCode(HttpStatus.OK)
-    DeleteWeightData(@Query() query: any, @Res() res: Response) {
-        return res.json({
-            message: 'Success',
-            data: `Información con el id ${query.id} eliminada`,
+    DeleteWeightData(
+        @Query() query: DeleteWeightTrackingDataDto,
+        @Res() res: Response,
+    ) {
+        this.weightTrackingDataService.deleteWeightTrackingData({
+            id: query.id,
         })
+        return res.json('Data deleted')
     }
 
     @Put()
     @HttpCode(HttpStatus.OK)
     updateWeightData(@Query() query: any, @Res() res: Response) {
-        return res.json({
-            message: 'Success',
-            data: `Información con el id ${query.id} actualizada`,
-        })
+        return res.json('Pendient')
     }
 }
