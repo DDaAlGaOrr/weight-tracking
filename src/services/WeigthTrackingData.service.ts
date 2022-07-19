@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common'
-
-import { DetailedWeightTableInterface } from 'src/interfaces/DetailedWeightTable.interface'
-import { GeneralWeihtTableInterface } from 'src/interfaces/GeneralWeightTable.interface'
-import { NewWeightTrackingDataInterface } from 'src/interfaces/NewWeightTrackingData.interface'
-import { WeigthTrackingGraphInterface } from 'src/interfaces/WeightTrackingGraph.interface'
+import { DetailedWeightTableInterface } from '../../src/interfaces/DetailedWeightTable.interface'
+import { GeneralWeihtTableInterface } from '../../src/interfaces/GeneralWeightTable.interface'
+import { NewWeightTrackingDataInterface } from '../../src/interfaces/NewWeightTrackingData.interface'
+import { WeigthTrackingGraphInterface } from '../../src/interfaces/WeightTrackingGraph.interface'
 
 interface DeleteWeightData {
     id: number
