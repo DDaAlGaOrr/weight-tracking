@@ -4,7 +4,6 @@ import { DetailedWeightTableInterface } from 'src/interfaces/DetailedWeightTable
 import { GeneralWeihtTableInterface } from 'src/interfaces/GeneralWeightTable.interface'
 import { NewWeightTrackingDataInterface } from 'src/interfaces/NewWeightTrackingData.interface'
 import { WeigthTrackingGraphInterface } from 'src/interfaces/WeightTrackingGraph.interface'
-import { json } from 'stream/consumers'
 
 interface DeleteWeightData {
     id: number

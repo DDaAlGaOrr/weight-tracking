@@ -6,22 +6,19 @@ export type UserDocument = User & Document
 @Schema()
 export class User {
     @Prop({ required: true })
-    username: string
+    email: string
 
     @Prop({ required: true })
-    email: number
+    firstname: string
+
+    @Prop({ required: true })
+    lastname: string
 
     @Prop({ required: true })
     password: string
 
     @Prop({ required: true })
-    firstName: string
-
-    @Prop({ required: true })
-    lastName: string
-
-    @Prop({ required: true })
-    age: string
+    age: number
 
     @Prop({ required: true })
     height: number
@@ -30,4 +27,4 @@ export class User {
     targetWeigth: number
 }
 
-export const CatSchema = SchemaFactory.createForClass(User)
+export const userSchema = SchemaFactory.createForClass(User)
