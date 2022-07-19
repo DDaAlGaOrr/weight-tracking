@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 
-import { WeightTrackingDataController } from '../../src/controllers/weightTrackingData.controller'
-import { WeigthTrackingDataService } from '../../src/services/WeigthTrackingData.service'
+import { WeightTrackingDataController } from './../controllers/weightTrackingData.controller'
+import { WeigthTrackingDataService } from './../services/WeigthTrackingData.service'
 
 @Module({
     controllers: [WeightTrackingDataController],

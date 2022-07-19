@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
-import { AuthUserInterface } from '../../src/interfaces/AuthUser.interface'
-import { UserInterface } from '../../src/interfaces/User.interface.interface'
+import { AuthUserInterface } from './../interfaces/AuthUser.interface'
+import { UserInterface } from './../interfaces/User.interface.interface'
 import { User, UserDocument } from './../schemas/User.schema'
 
 interface UpdateUserInterface extends UserInterface {

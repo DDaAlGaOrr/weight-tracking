@@ -12,8 +12,8 @@ import {
 } from '@nestjs/common'
 import { Response } from 'express'
 
-import { ValidateNewWeightTrackingData } from '../../src/dtos/WeightTrackingData.dto'
-import { WeigthTrackingDataService } from '../../src/services/WeigthTrackingData.service'
+import { ValidateNewWeightTrackingData } from '../dtos/WeightTrackingData.dto'
+import { WeigthTrackingDataService } from '../services/WeigthTrackingData.service'
 
 class DeleteWeightTrackingDataDto {
     id: number
