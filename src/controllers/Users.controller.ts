@@ -34,8 +34,11 @@ export class UsersController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    createUser(@Body() body: ValidateCreateUserDto, @Res() res: Response) {
-        this.userService.createUser({
+    async createUser(
+        @Body() body: ValidateCreateUserDto,
+        @Res() res: Response,
+    ) {
+        const newUser = await this.userService.createUser({
             email: body.email,
             firstname: body.firstname,
             lastname: body.lastname,
@@ -44,9 +47,8 @@ export class UsersController {
             height: body.height,
             targetWeigth: body.targetWeight,
         })
-        return res.json({
-            message: 'creado',
-        })
+        console.log(newUser)
+        return res.json({ id: newUser })
     }
 
     @Put()
