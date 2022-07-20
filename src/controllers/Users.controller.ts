@@ -39,6 +39,7 @@ export class UsersController {
         @Body() body: ValidateCreateUserDto,
         @Res() res: Response,
     ) {
+        console.log(body)
         const newUser = await this.userService.createUser({
             email: body.email,
             firstname: body.firstname,
@@ -46,7 +47,7 @@ export class UsersController {
             password: body.password,
             age: body.age,
             height: body.height,
-            targetWeigth: body.targetWeight,
+            targetWeight: body.targetWeight,
         })
         console.log(newUser)
         return res.json({ newUser: newUser })

@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
 import { AuthUserInterface } from './../interfaces/AuthUser.interface'
-import { UserInterface } from './../interfaces/User.interface.interface'
+import { UserInterface } from '../interfaces/User.interface'
 import { User, UserDocument } from './../schemas/User.schema'
 
 interface UpdateUserInterface extends UserInterface {
@@ -16,9 +16,9 @@ export class UsersService {
     ) {}
 
     async createUser(newUserData: UserInterface): Promise<User> {
-        const res = await this.userModel.create(newUserData)
-        console.log(res)
-        return res
+        // console.log(newUserData)
+        const newUser = await this.userModel.create(newUserData)
+        return newUser
     }
     authLogin(credentials: AuthUserInterface) {
         console.log(credentials)

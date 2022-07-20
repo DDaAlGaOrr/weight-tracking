@@ -5,5 +5,5 @@ export interface UserInterface {
     lastname: string
     age: number
     height: number
-    targetWeigth: number
+    targetWeight: number
 }

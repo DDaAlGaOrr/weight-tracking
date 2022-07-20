@@ -24,7 +24,7 @@ export class User {
     height: number
 
     @Prop({ required: true })
-    targetWeigth: number
+    targetWeight: number
 }
 
 export const userSchema = SchemaFactory.createForClass(User)
