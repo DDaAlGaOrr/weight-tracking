@@ -22,11 +22,9 @@ export class UsersController {
     @Post('authLogin')
     @HttpCode(HttpStatus.OK)
     login(@Body() body: AuthUserDto) {
-        const email = JSON.stringify(body.email)
-        const password = JSON.stringify(body.password)
         this.userService.authLogin({
-            email: email,
-            password: password,
+            email: body.email,
+            password: body.password,
         })
         return {
             message: 'auth user',
