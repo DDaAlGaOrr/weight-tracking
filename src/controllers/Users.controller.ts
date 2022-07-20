@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common'
 import { Response } from 'express'
 
-import { AuthUserDto } from '../dtos/AuthUser.dto'
-import { ValidateCreateUserDto } from '../dtos/User.dto'
-import { UsersService } from '../services/Users.service'
+import { AuthUserDto } from './../dtos/AuthUser.dto'
+import { ValidateCreateUserDto } from './../dtos/User.dto'
+import { UsersService } from './../services/Users.service'
 
 @Controller('users')
 export class UsersController {
@@ -49,7 +49,7 @@ export class UsersController {
             targetWeigth: body.targetWeight,
         })
         console.log(newUser)
-        return res.json({ id: newUser })
+        return res.json({ newUser: newUser })
     }
 
     @Put()
