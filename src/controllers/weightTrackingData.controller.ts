@@ -29,7 +29,7 @@ export class WeightTrackingDataController {
         @Body() body: ValidateNewWeightTrackingData,
     ) {
         this.weightTrackingDataService.createWeightTrackingData({
-            date: body.date,
+            date: new Date(body.date),
             weight: body.weight,
         })
         return res.json({

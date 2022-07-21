@@ -5,6 +5,6 @@ export class ValidateNewWeightTrackingData {
     weight: number
 
     @IsNotEmpty()
-    @IsString()
+    @IsDate()
     date: string
 }
