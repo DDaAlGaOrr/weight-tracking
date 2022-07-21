@@ -1,15 +1,15 @@
 version: '3.7'
 
 services:
-    mongo:
+    weight-tracking-mongo:
         image: mongo:5
-        container_name: mongo
+        container_name: weight-tracking-mongo
         ports:
             - 27017:27017
-    mongo-express:
+    weight-tracking-mongo-express:
         image: mongo-express:0.54
-        container_name: mongo-express
+        container_name: weight-tracking-mongo-express
         ports:
             - 8081:8081
         environment:
-            ME_CONFIG_MONGODB_SERVER: mongo
+            ME_CONFIG_MONGODB_SERVER: weight-tracking-mongo
