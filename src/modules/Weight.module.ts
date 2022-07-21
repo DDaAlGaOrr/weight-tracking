@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 
-import { WeightController } from '../controllers/weight.controller'
-import { WeigthService } from '../services/Weight.service'
+import { WeightController } from '../controllers/Weight.controller'
 import { Weight, WeightSchema } from '../schemas/Weight.schema'
+import { WeightService } from '../services/Weight.service'
+
 @Module({
     controllers: [WeightController],
-    providers: [WeigthService],
+    providers: [WeightService],
     imports: [
         MongooseModule.forFeature([
             {

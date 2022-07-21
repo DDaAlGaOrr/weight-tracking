@@ -1,6 +1,6 @@
+import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { Injectable } from '@nestjs/common'
 
 import {
     DetailedWeightTableInterface,
@@ -14,7 +14,7 @@ interface DeleteWeight {
     id: number
 }
 @Injectable()
-export class WeigthService {
+export class WeightService {
     constructor(
         @InjectModel(Weight.name)
         private weightModel: Model<WeightDocument>,

@@ -13,14 +13,14 @@ import {
 import { Response } from 'express'
 
 import { ValidateWeight } from '../dtos/Weight.dto'
-import { WeigthService } from '../services/Weight.service'
+import { WeightService } from '../services/Weight.service'
 
 class DeleteWeightDto {
     id: number
 }
 @Controller('weight')
 export class WeightController {
-    constructor(private weightService: WeigthService) {}
+    constructor(private weightService: WeightService) {}
 
     @HttpCode(HttpStatus.CREATED)
     @Post()
