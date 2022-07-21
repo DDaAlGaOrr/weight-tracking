@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 
-export type WeightDataDocument = WeightData & Document
+export type WeightDocument = Weight & Document
 
 @Schema()
-export class WeightData {
+export class Weight {
     @Prop({ required: true })
     date: Date
 
@@ -12,4 +12,4 @@ export class WeightData {
     weight: number
 }
 
-export const WeightDataSchema = SchemaFactory.createForClass(WeightData)
+export const WeightSchema = SchemaFactory.createForClass(Weight)
