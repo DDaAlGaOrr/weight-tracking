@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 
 import { WeightController } from '../controllers/weight.controller'
-import { WeigthService } from '../services/Weigth.service'
+import { WeigthService } from '../services/Weight.service'
 import { Weight, WeightSchema } from '../schemas/Weight.schema'
 @Module({
     controllers: [WeightController],

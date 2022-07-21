@@ -11,8 +11,7 @@ import {
 } from '@nestjs/common'
 import { Response } from 'express'
 
-import { AuthUserDto } from './../dtos/AuthUser.dto'
-import { ValidateCreateUserDto } from './../dtos/User.dto'
+import { ValidateCreateUserDto, AuthUserDto } from './../dtos/User.dto'
 import { UsersService } from './../services/Users.service'
 
 @Controller('users')

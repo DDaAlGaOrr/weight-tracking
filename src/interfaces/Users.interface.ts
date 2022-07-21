@@ -7,3 +7,7 @@ export interface UserInterface {
     height: number
     targetWeight: number
 }
+export interface AuthUserInterface {
+    email: string
+    password: string
+}

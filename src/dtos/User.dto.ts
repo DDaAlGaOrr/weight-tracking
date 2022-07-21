@@ -36,3 +36,14 @@ export class ValidateCreateUserDto {
     @IsNumber()
     targetWeight: number
 }
+
+export class AuthUserDto {
+    @IsNotEmpty()
+    @IsString()
+    @IsEmail()
+    email: string
+
+    @IsNotEmpty()
+    @IsString()
+    password: string
+}

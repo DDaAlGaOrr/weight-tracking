@@ -2,10 +2,12 @@ import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { Injectable } from '@nestjs/common'
 
-import { DetailedWeightTableInterface } from '../interfaces/DetailedWeightTable.interface'
-import { GeneralWeihtTableInterface } from '../interfaces/GeneralWeightTable.interface'
-import { NewWeightInterface } from '../interfaces/NewWeight.interface'
-import { WeigthGraphInterface } from '../interfaces/WeightGraph.interface'
+import {
+    DetailedWeightTableInterface,
+    GeneralWeihtTableInterface,
+    NewWeightInterface,
+    WeigthGraphInterface,
+} from '../interfaces/Weight.interface'
 import { Weight, WeightDocument } from '../schemas/Weight.schema'
 
 interface DeleteWeight {

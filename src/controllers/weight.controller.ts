@@ -13,7 +13,7 @@ import {
 import { Response } from 'express'
 
 import { ValidateWeight } from '../dtos/Weight.dto'
-import { WeigthService } from '../services/Weigth.service'
+import { WeigthService } from '../services/Weight.service'
 
 class DeleteWeightDto {
     id: number
