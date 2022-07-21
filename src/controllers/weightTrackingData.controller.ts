@@ -24,16 +24,18 @@ export class WeightTrackingDataController {
 
     @HttpCode(HttpStatus.CREATED)
     @Post()
-    saveNewweightTrackingData(
+    async saveNewweightTrackingData(
         @Res() res: Response,
         @Body() body: ValidateNewWeightTrackingData,
     ) {
-        this.weightTrackingDataService.createWeightTrackingData({
-            date: new Date(body.date),
-            weight: body.weight,
-        })
+        const newData =
+            await this.weightTrackingDataService.createWeightTrackingData({
+                date: new Date(body.date),
+                weight: body.weight,
+            })
         return res.json({
             message: 'Created',
+            newData: newData,
         })
     }
 

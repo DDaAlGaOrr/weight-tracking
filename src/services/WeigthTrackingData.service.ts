@@ -1,16 +1,30 @@
+import { InjectModel } from '@nestjs/mongoose'
+import { Model } from 'mongoose'
 import { Injectable } from '@nestjs/common'
+
 import { DetailedWeightTableInterface } from './../interfaces/DetailedWeightTable.interface'
 import { GeneralWeihtTableInterface } from './../interfaces/GeneralWeightTable.interface'
 import { NewWeightTrackingDataInterface } from './../interfaces/NewWeightTrackingData.interface'
 import { WeigthTrackingGraphInterface } from './../interfaces/WeightTrackingGraph.interface'
+import {
+    WeightData,
+    WeightDataDocument,
+} from './../schemas/WeightTrackingData.schema'
 
 interface DeleteWeightData {
     id: number
 }
 @Injectable()
 export class WeigthTrackingDataService {
-    createWeightTrackingData(newTrackingData: NewWeightTrackingDataInterface) {
-        console.log(newTrackingData)
+    constructor(
+        @InjectModel(WeightData.name)
+        private weightDataModel: Model<WeightDataDocument>,
+    ) {}
+    async createWeightTrackingData(
+        newWeightData: NewWeightTrackingDataInterface,
+    ) {
+        const result = await this.weightDataModel.create(newWeightData)
+        return result
     }
     generalWeihtTable(): GeneralWeihtTableInterface {
         return {
