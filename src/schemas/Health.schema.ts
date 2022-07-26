@@ -22,7 +22,7 @@ export class Health {
     @Prop({ required: true })
     IMC: number
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true })
     userId: User
 }
 

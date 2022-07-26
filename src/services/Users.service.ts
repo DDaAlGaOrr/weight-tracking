@@ -32,14 +32,14 @@ export class UsersService {
     async createUser(newUserData: UserInterface): Promise<any> {
         const height = newUserData.height
         const weight = newUserData.firstWeight
-        const imc = weight / (height * height)
+        const imc = (weight / (height * height)).toFixed()
 
         const newUser = await this.userModel.create(newUserData)
 
         const idUser = newUser._id.toString()
 
         const userHealth = await this.healthModel.create({
-            User: idUser,
+            userId: idUser,
             age: newUserData.age,
             firstWeight: newUserData.firstWeight,
             height: newUserData.height,
