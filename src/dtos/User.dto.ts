@@ -30,6 +30,10 @@ export class ValidateCreateUserDto {
 
     @IsNotEmpty()
     @IsNumber()
+    firstWeight: number
+
+    @IsNotEmpty()
+    @IsNumber()
     height: number
 
     @IsNotEmpty()

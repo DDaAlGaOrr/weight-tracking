@@ -4,6 +4,7 @@ export interface UserInterface {
     firstname: string
     lastname: string
     age: number
+    firstWeight: number
     height: number
     targetWeight: number
 }

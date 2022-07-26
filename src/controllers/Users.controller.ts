@@ -10,7 +10,6 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-
 import { AuthUserDto, ValidateCreateUserDto } from './../dtos/User.dto'
 import { UsersService } from './../services/Users.service'
 
@@ -36,18 +35,17 @@ export class UsersController {
         @Body() body: ValidateCreateUserDto,
         @Res() res: Response,
     ) {
-        console.log(body)
-        const newUser = await this.userService.createUser({
+        const newUser = await this.userService.authCreateUser({
             email: body.email,
             firstname: body.firstname,
             lastname: body.lastname,
             password: body.password,
             age: body.age,
+            firstWeight: body.firstWeight,
             height: body.height,
             targetWeight: body.targetWeight,
         })
-        console.log(newUser)
-        return res.json({ newUser: newUser })
+        return res.json({ message: newUser })
     }
 
     @Put()
