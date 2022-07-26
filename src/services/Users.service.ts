@@ -49,8 +49,20 @@ export class UsersService {
 
         return { newUser: newUser, userHealth: userHealth }
     }
-    authLogin(credentials: AuthUserInterface) {
-        console.log(credentials)
+    async authLogin(credentials: AuthUserInterface) {
+        const email = credentials.email
+        const password = credentials.password
+
+        const authUser = await this.userModel.find({
+            email: email,
+            password: password,
+        })
+        if (authUser.length > 0) {
+            const userId = authUser[0]._id.toString()
+            return { authUser: true, userId: userId, email: email }
+        } else {
+            return { authUser: false }
+        }
     }
     updateUser(updateUser: UpdateUserInterface) {
         console.log(updateUser)

@@ -17,18 +17,6 @@ import { UsersService } from './../services/Users.service'
 export class UsersController {
     constructor(private userService: UsersService) {}
 
-    @Post('authLogin')
-    @HttpCode(HttpStatus.OK)
-    login(@Body() body: AuthUserDto) {
-        this.userService.authLogin({
-            email: body.email,
-            password: body.password,
-        })
-        return {
-            message: 'auth user',
-        }
-    }
-
     @Post()
     @HttpCode(HttpStatus.CREATED)
     async createUser(
@@ -46,6 +34,13 @@ export class UsersController {
             targetWeight: body.targetWeight,
         })
         return res.json({ message: newUser })
+    }
+
+    @Post('authLogin')
+    @HttpCode(HttpStatus.OK)
+    async authUser(@Body() body: AuthUserDto, @Res() res: Response) {
+        const authResponse = await this.userService.authLogin(body)
+        return res.json({ authResponse })
     }
 
     @Put()
