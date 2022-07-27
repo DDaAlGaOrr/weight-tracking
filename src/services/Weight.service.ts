@@ -21,6 +21,7 @@ export class WeightService {
     ) {}
     async createWeight(newWeight: NewWeightInterface) {
         const result = await this.weightModel.create(newWeight)
+        console.log(result.date.toLocaleDateString())
         return result
     }
 

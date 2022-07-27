@@ -63,7 +63,12 @@ export class UsersService {
         if (authUser.length > 0) {
             const userId = authUser[0]._id.toString()
             const token = this.jwtService.sign(userId)
-            return { authUser: true, token: token, email: email }
+            return {
+                authUser: true,
+                token: token,
+                email: email,
+                userId: userId,
+            }
         } else {
             return { authUser: false }
         }

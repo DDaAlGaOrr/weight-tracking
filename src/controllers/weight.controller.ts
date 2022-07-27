@@ -28,6 +28,7 @@ export class WeightController {
         const newData = await this.weightService.createWeight({
             date: new Date(body.date),
             weight: body.weight,
+            userId: body.userId,
         })
         console.log(newData)
         return res.json({

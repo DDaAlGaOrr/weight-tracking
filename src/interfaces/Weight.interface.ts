@@ -5,6 +5,7 @@ export interface WeigthGraphInterface {
 export interface NewWeightInterface {
     weight: number
     date: Date
+    userId: string
 }
 export interface GeneralWeihtTableInterface {
     initialWeight: number

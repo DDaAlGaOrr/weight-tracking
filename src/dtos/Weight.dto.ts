@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber } from '@nestjs/class-validator'
+import { IsNotEmpty, IsNumber, IsString } from '@nestjs/class-validator'
 
 export class ValidateWeight {
     @IsNotEmpty()
@@ -7,4 +7,8 @@ export class ValidateWeight {
 
     @IsNotEmpty()
     date: string
+
+    @IsNotEmpty()
+    @IsString()
+    userId: string
 }
