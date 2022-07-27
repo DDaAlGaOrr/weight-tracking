@@ -7,7 +7,7 @@ export interface NewWeightInterface {
     date: Date
     userId: string
 }
-export interface GeneralWeihtTableInterface {
+export interface GeneralWeightTableInterface {
     initialWeight: number
     actualWeight: number
     targetWeight: number

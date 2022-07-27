@@ -9,6 +9,7 @@ import {
     Put,
     Query,
     Res,
+    Param,
 } from '@nestjs/common'
 import { Response } from 'express'
 
@@ -30,7 +31,6 @@ export class WeightController {
             weight: body.weight,
             userId: body.userId,
         })
-        console.log(newData)
         return res.json({
             message: 'Created',
             newData: newData,
@@ -45,8 +45,10 @@ export class WeightController {
 
     @Get('generalTable')
     @HttpCode(HttpStatus.OK)
-    getGeneralTable(@Res() res: Response) {
-        return res.json(this.weightService.generalWeihtTable())
+    async getGeneralTable(@Query() query: any, @Res() res: Response) {
+        return res.json(
+            await this.weightService.generalWeightTable(query.userId),
+        )
     }
 
     @Get('graph')

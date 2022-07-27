@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { WeightController } from '../controllers/Weight.controller'
 import { Weight, WeightSchema } from '../schemas/Weight.schema'
 import { WeightService } from '../services/Weight.service'
+import { Health, HealthSchema } from './../schemas/Health.schema'
+import { User, userSchema } from './../schemas/User.schema'
 
 @Module({
     controllers: [WeightController],
@@ -13,6 +15,14 @@ import { WeightService } from '../services/Weight.service'
             {
                 name: Weight.name,
                 schema: WeightSchema,
+            },
+            {
+                name: Health.name,
+                schema: HealthSchema,
+            },
+            {
+                name: User.name,
+                schema: userSchema,
             },
         ]),
     ],
