@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import { JwtService } from '@nestjs/jwt'
 
 import {
     AuthUserInterface,
@@ -17,6 +18,7 @@ export class UsersService {
     constructor(
         @InjectModel(User.name) private userModel: Model<UserDocument>,
         @InjectModel(Health.name) private healthModel: Model<HealthDocument>,
+        private readonly jwtService: JwtService,
     ) {}
 
     async authCreateUser(user: UserInterface): Promise<any> {
@@ -49,6 +51,7 @@ export class UsersService {
 
         return { newUser: newUser, userHealth: userHealth }
     }
+
     async authLogin(credentials: AuthUserInterface) {
         const email = credentials.email
         const password = credentials.password
@@ -59,7 +62,8 @@ export class UsersService {
         })
         if (authUser.length > 0) {
             const userId = authUser[0]._id.toString()
-            return { authUser: true, userId: userId, email: email }
+            const token = this.jwtService.sign(userId)
+            return { authUser: true, token: token, email: email }
         } else {
             return { authUser: false }
         }
