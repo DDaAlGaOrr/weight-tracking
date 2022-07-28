@@ -23,17 +23,18 @@ export class UsersController {
         @Body() body: ValidateCreateUserDto,
         @Res() res: Response,
     ) {
-        const newUser = await this.userService.authCreateUser({
-            email: body.email,
-            firstname: body.firstname,
-            lastname: body.lastname,
-            password: body.password,
-            age: body.age,
-            firstWeight: body.firstWeight,
-            height: body.height,
-            targetWeight: body.targetWeight,
-        })
-        return res.json({ message: newUser })
+        return res.json(
+            await this.userService.authCreateUser({
+                email: body.email,
+                firstname: body.firstname,
+                lastname: body.lastname,
+                password: body.password,
+                age: body.age,
+                firstWeight: body.firstWeight,
+                height: body.height,
+                targetWeight: body.targetWeight,
+            }),
+        )
     }
 
     @Post('authLogin')

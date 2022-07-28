@@ -39,8 +39,10 @@ export class WeightController {
 
     @Get('detaliedTable')
     @HttpCode(HttpStatus.OK)
-    getDetaliedTable(@Res() res: Response) {
-        return res.json(this.weightService.detailedWeightTable())
+    async getDetaliedTable(@Query() query: any, @Res() res: Response) {
+        return res.json(
+            await this.weightService.detailedWeightTable(query.userId),
+        )
     }
 
     @Get('generalTable')

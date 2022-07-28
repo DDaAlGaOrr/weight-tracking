@@ -43,13 +43,17 @@ export class WeightService {
         }
     }
 
-    detailedWeightTable(): DetailedWeightTableInterface {
-        return {
-            date: '07/12/2022',
-            IMC: 34,
-            actualWeight: 90,
-            loseWeight: 1,
-        }
+    async detailedWeightTable(userId): Promise<DetailedWeightTableInterface[]> {
+        const data = await this.weightModel.find({ userId: userId })
+        const detailedTable: DetailedWeightTableInterface[] = []
+        data.forEach((element) => {
+            detailedTable.push({
+                actualWeight: element.weight,
+                date: element.date.toLocaleDateString(),
+            })
+        })
+        console.log(detailedTable)
+        return detailedTable
     }
     weigthGraph(): WeigthGraphInterface {
         return {
