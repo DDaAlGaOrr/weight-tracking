@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { JwtService } from '@nestjs/jwt'
 
 import {
     AuthUserInterface,
@@ -74,9 +74,9 @@ export class UsersService {
         }
     }
     updateUser(updateUser: UpdateUserInterface) {
-        console.log(updateUser)
+        return 'update user'
     }
     deleteUser(id: any) {
-        console.log(id)
+        return 'delte user'
     }
 }

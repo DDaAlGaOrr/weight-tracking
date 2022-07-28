@@ -9,10 +9,8 @@ import {
     Put,
     Query,
     Res,
-    Param,
 } from '@nestjs/common'
 import { Response } from 'express'
-
 import { ValidateWeight } from '../dtos/Weight.dto'
 import { WeightService } from '../services/Weight.service'
 

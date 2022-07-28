@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import path from 'path/posix'
 
 import {
     DetailedWeightTableInterface,
-    GeneralWeightTableInterface,
     NewWeightInterface,
     WeigthGraphInterface,
 } from '../interfaces/Weight.interface'
@@ -35,7 +33,6 @@ export class WeightService {
         const weightData = await this.weightModel.find({
             userId: userId,
         })
-        console.log(weightData)
         return {
             initialWeight: healtData[0].firstWeight,
             targetWeight: healtData[0].targetWeight,
@@ -52,7 +49,6 @@ export class WeightService {
                 date: element.date.toLocaleDateString(),
             })
         })
-        console.log(detailedTable)
         return detailedTable
     }
     weigthGraph(): WeigthGraphInterface {
@@ -62,6 +58,6 @@ export class WeightService {
         }
     }
     deleteWeight(id: DeleteWeight) {
-        console.log(id)
+        return 'delete data'
     }
 }
