@@ -41,12 +41,18 @@ export class WeightService {
     }
 
     async detailedWeightTable(userId): Promise<DetailedWeightTableInterface[]> {
-        const data = await this.weightModel.find({ userId: userId })
+        const weightData = await this.weightModel.find({ userId: userId })
+        const healtData = await this.healthModel.find({
+            userId: userId,
+        })
         const detailedTable: DetailedWeightTableInterface[] = []
-        data.forEach((element) => {
-            detailedTable.push({
-                actualWeight: element.weight,
-                date: element.date.toLocaleDateString(),
+        weightData.forEach((weightMdl) => {
+            healtData.forEach((healtMdl) => {
+                detailedTable.push({
+                    date: weightMdl.date.toLocaleDateString(),
+                    weight: weightMdl.weight,
+                    loseWeight: healtMdl.firstWeight - weightMdl.weight,
+                })
             })
         })
         return detailedTable

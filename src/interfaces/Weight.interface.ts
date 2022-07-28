@@ -14,5 +14,6 @@ export interface GeneralWeightTableInterface {
 }
 export interface DetailedWeightTableInterface {
     date: string
-    actualWeight: number
+    weight: number
+    loseWeight: number
 }
