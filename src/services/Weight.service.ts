@@ -22,8 +22,8 @@ export class WeightService {
         @InjectModel(User.name) private userModel: Model<UserDocument>,
     ) {}
     async createWeight(newWeight: NewWeightInterface) {
-        const result = await this.weightModel.create(newWeight)
-        return result
+        await this.weightModel.create(newWeight)
+        return { create: true }
     }
 
     async generalWeightTable(userId) {
@@ -57,11 +57,17 @@ export class WeightService {
         })
         return detailedTable
     }
-    weigthGraph(): WeigthGraphInterface {
-        return {
-            date: '07/11/2022',
-            weight: 91,
-        }
+
+    async weigthGraph(userId): Promise<WeigthGraphInterface[]> {
+        const data = await this.weightModel.find({ userId: userId })
+        const chart: WeigthGraphInterface[] = []
+        data.forEach((element) => {
+            chart.push({
+                date: element.date.toLocaleDateString(),
+                weight: element.weight,
+            })
+        })
+        return chart
     }
     deleteWeight(id: DeleteWeight) {
         return 'delete data'

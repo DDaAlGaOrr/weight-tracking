@@ -1,6 +1,6 @@
 export interface WeigthGraphInterface {
-    weight: number
     date: string
+    weight: number
 }
 export interface NewWeightInterface {
     weight: number

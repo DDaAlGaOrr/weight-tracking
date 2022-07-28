@@ -24,15 +24,13 @@ export class WeightController {
     @HttpCode(HttpStatus.CREATED)
     @Post()
     async NewWeight(@Res() res: Response, @Body() body: ValidateWeight) {
-        const newData = await this.weightService.createWeight({
-            date: new Date(body.date),
-            weight: body.weight,
-            userId: body.userId,
-        })
-        return res.json({
-            message: 'Created',
-            newData: newData,
-        })
+        return res.json(
+            await this.weightService.createWeight({
+                date: new Date(body.date),
+                weight: body.weight,
+                userId: body.userId,
+            }),
+        )
     }
 
     @Get('detaliedTable')
@@ -53,8 +51,8 @@ export class WeightController {
 
     @Get('graph')
     @HttpCode(HttpStatus.OK)
-    generateGraph(@Res() res: Response) {
-        return res.json(this.weightService.weigthGraph())
+    async generateGraph(@Query() query: any, @Res() res: Response) {
+        return res.json(await this.weightService.weigthGraph(query.userId))
     }
 
     @Delete()
