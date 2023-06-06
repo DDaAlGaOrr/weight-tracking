@@ -2,17 +2,20 @@ import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import * as bcrypt from 'bcrypt'
 
 import {
     AuthUserInterface,
     UserInterface,
 } from './../interfaces/Users.interface'
+import { MessagesInterface } from './../interfaces/Messages.interface'
 import { Health, HealthDocument } from './../schemas/Health.schema'
 import { User, UserDocument } from './../schemas/User.schema'
 
 interface UpdateUserInterface extends UserInterface {
     id: number
 }
+const saltOrRounds = 10
 @Injectable()
 export class UsersService {
     constructor(
@@ -21,35 +24,64 @@ export class UsersService {
         private readonly jwtService: JwtService,
     ) {}
 
-    async authCreateUser(user: UserInterface): Promise<any> {
+    async CreateUser(user: UserInterface): Promise<MessagesInterface> {
         const email = user.email
+        const PasswordHash = await bcrypt.hash(user.password, 10)
+        const height = user.height
+        const weight = user.firstWeight
+        const IMC = (weight / (height * height)).toFixed()
+
         const emailExists = await this.userModel.find({ email: email })
 
-        if (emailExists.length === 0) {
-            return { exist: false, message: this.createUser(user) }
-        } else {
-            return { exist: true, message: 'Este correo ya está siendo usado' }
+        if (emailExists.length != 0) {
+            return {
+                status: false,
+                statusCode: 400,
+                message: 'This email is already being used',
+            }
         }
-    }
-    async createUser(newUserData: UserInterface): Promise<any> {
-        const height = newUserData.height
-        const weight = newUserData.firstWeight
-        const imc = (weight / (height * height)).toFixed()
 
-        const newUser = await this.userModel.create(newUserData)
+        const userId = (
+            await this.userModel.create({
+                email: email,
+                password: PasswordHash,
+                firstname: user.firstname,
+                lastname: user.lastname,
+            })
+        )._id.toString()
 
-        const idUser = newUser._id.toString()
+        if (!userId) {
+            return {
+                status: false,
+                statusCode: 400,
+                message: `something went wrong`,
+            }
+        }
 
-        const userHealth = await this.healthModel.create({
-            userId: idUser,
-            age: newUserData.age,
-            firstWeight: newUserData.firstWeight,
-            height: newUserData.height,
-            targetWeight: newUserData.targetWeight,
-            IMC: imc,
-        })
+        const insertHealthData = (
+            await this.healthModel.create({
+                userId: userId,
+                age: user.age,
+                firstWeight: user.firstWeight,
+                height: user.height,
+                targetWeight: user.targetWeight,
+                IMC: IMC,
+            })
+        )._id
 
-        return { newUser: newUser, userHealth: userHealth }
+        if (!insertHealthData) {
+            return {
+                status: false,
+                statusCode: 400,
+                message: `something went wrong`,
+            }
+        }
+
+        return {
+            status: true,
+            statusCode: 200,
+            message: `User created`,
+        }
     }
 
     async authLogin(credentials: AuthUserInterface) {
@@ -64,13 +96,11 @@ export class UsersService {
             const userId = authUser[0]._id.toString()
             const token = this.jwtService.sign(userId)
             return {
-                authUser: true,
+                status: true,
                 token: token,
-                email: email,
-                userId: userId,
             }
         } else {
-            return { authUser: false }
+            return { status: false, message: 'email or password incorrect' }
         }
     }
     updateUser(updateUser: UpdateUserInterface) {

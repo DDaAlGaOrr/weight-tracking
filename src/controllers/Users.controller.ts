@@ -10,7 +10,7 @@ import {
     Res,
 } from '@nestjs/common'
 import { Response } from 'express'
-import { AuthUserDto, ValidateCreateUserDto } from './../dtos/User.dto'
+import { AuthUserDto, CreateUserDto } from './../dtos/User.dto'
 import { UsersService } from './../services/Users.service'
 
 @Controller('users')
@@ -19,12 +19,9 @@ export class UsersController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    async createUser(
-        @Body() body: ValidateCreateUserDto,
-        @Res() res: Response,
-    ) {
+    async createUser(@Body() body: CreateUserDto, @Res() res: Response) {
         return res.json(
-            await this.userService.authCreateUser({
+            await this.userService.CreateUser({
                 email: body.email,
                 firstname: body.firstname,
                 lastname: body.lastname,
