@@ -8,7 +8,10 @@ import {
     AuthUserInterface,
     UserInterface,
 } from './../interfaces/Users.interface'
-import { MessagesInterface } from './../interfaces/Messages.interface'
+import {
+    MessagesInterface,
+    AuthMessagesInterface,
+} from './../interfaces/Messages.interface'
 import { Health, HealthDocument } from './../schemas/Health.schema'
 import { User, UserDocument } from './../schemas/User.schema'
 
@@ -20,7 +23,8 @@ const saltOrRounds = 10
 export class UsersService {
     constructor(
         @InjectModel(User.name) private userModel: Model<UserDocument>,
-        @InjectModel(Health.name) private healthModel: Model<HealthDocument>,
+        @InjectModel(Health.name)
+        private healthModel: Model<HealthDocument>,
         private readonly jwtService: JwtService,
     ) {}
 
@@ -61,7 +65,7 @@ export class UsersService {
         const insertHealthData = (
             await this.healthModel.create({
                 userId: userId,
-                age: user.age,
+                birthdate: user.birthdate,
                 firstWeight: user.firstWeight,
                 height: user.height,
                 targetWeight: user.targetWeight,
@@ -79,34 +83,50 @@ export class UsersService {
 
         return {
             status: true,
-            statusCode: 200,
+            statusCode: 201,
             message: `User created`,
         }
     }
 
-    async authLogin(credentials: AuthUserInterface) {
+    async authLogin(
+        credentials: AuthUserInterface,
+    ): Promise<AuthMessagesInterface> {
         const email = credentials.email
         const password = credentials.password
 
-        const authUser = await this.userModel.find({
-            email: email,
-            password: password,
-        })
-        if (authUser.length > 0) {
-            const userId = authUser[0]._id.toString()
-            const token = this.jwtService.sign(userId)
+        const user = await this.userModel.findOne({ email: email })
+        if (!user) {
             return {
-                status: true,
-                token: token,
+                status: false,
+                statusCode: 401,
+                message: 'the email is wrong',
+                token: '',
             }
-        } else {
-            return { status: false, message: 'email or password incorrect' }
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password)
+        if (!passwordMatch) {
+            return {
+                status: false,
+                statusCode: 401,
+                message: 'the password is wrong',
+                token: '',
+            }
+        }
+        const userId = user._id.toString()
+        const token = this.jwtService.sign(userId)
+
+        return {
+            status: true,
+            statusCode: 200,
+            message: 'success',
+            token: token,
         }
     }
     updateUser(updateUser: UpdateUserInterface) {
         return 'update user'
     }
     deleteUser(id: any) {
-        return 'delte user'
+        return 'delete user'
     }
 }

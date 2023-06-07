@@ -25,8 +25,8 @@ export class CreateUserDto {
     lastname: string
 
     @IsNotEmpty()
-    @IsNumber()
-    age: number
+    @IsString()
+    birthdate: string
 
     @IsNotEmpty()
     @IsNumber()

@@ -3,7 +3,7 @@ export interface UserInterface {
     password: string
     firstname: string
     lastname: string
-    age: number
+    birthdate: string
     firstWeight: number
     height: number
     targetWeight: number

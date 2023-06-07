@@ -8,7 +8,7 @@ export type HealthDocument = Health & Document
 @Schema()
 export class Health {
     @Prop({ required: true })
-    age: number
+    birthdate: string
 
     @Prop({ required: true })
     firstWeight: number

@@ -26,7 +26,7 @@ export class UsersController {
                 firstname: body.firstname,
                 lastname: body.lastname,
                 password: body.password,
-                age: body.age,
+                birthdate: body.birthdate,
                 firstWeight: body.firstWeight,
                 height: body.height,
                 targetWeight: body.targetWeight,
